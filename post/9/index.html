@@ -1,0 +1,79 @@
+<!-- appname/inpv_github_io/templates/inpv_github_io/about.html -->
+<!-- appname/inpv_github_io/templates/inpv_github_io/base.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Post 2 | Welkynd's Gems</title>
+    <link rel="stylesheet" href="/static/css/styles.css">
+    <link rel="stylesheet" href="/static/css/pygments.css">
+    <link rel="stylesheet" href="/static/css/fixes.css">
+    <link rel="icon" type="image/svg+xml" href="/static/favicon.svg">
+    <link rel="alternate icon" href="/static/favicon.svg">
+</head>
+<body>
+    <header>
+        <h1>Welkynd's Gems</h1>
+        <nav>
+            <a href="/">Home</a>
+            <a href="/blog/">Blog</a>
+            <a href="/about/">About</a>
+            <a href="/contacts/">Contacts</a>
+        </nav>
+    </header>
+    <main>
+        
+<h2>Post 2</h2>
+<p>Feb. 24, 2026, 2:15 p.m.</p>
+
+<ul class="categories_list">
+    
+        <li><a href="/category/17/">Category 1</a></li>
+    
+</ul>
+
+
+    <div>
+        <img src="/media/posts/previews/2026-02-18_00-17_h6Di86B.png" alt="Post 2 preview" class="post-image">
+    </div>
+
+
+<div class="post-text"><p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+<div><table><tbody><tr><td><div><pre><span></span><span class="normal">1</span>
+<span class="normal">2</span>
+<span class="normal">3</span>
+<span class="normal">4</span>
+<span class="normal">5</span>
+<span class="normal">6</span>
+<span class="normal">7</span></pre></div></td><td><div><pre><span></span><code><span class="kn">from</span><span class="w"> </span><span class="nn">django.db</span><span class="w"> </span><span class="kn">import</span> <span class="n">models</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">markdownx.models</span><span class="w"> </span><span class="kn">import</span> <span class="n">MarkdownxField</span>
+
+<span class="k">class</span><span class="w"> </span><span class="nc">Post</span><span class="p">(</span><span class="n">models</span><span class="o">.</span><span class="n">Model</span><span class="p">):</span>
+    <span class="n">title</span> <span class="o">=</span> <span class="n">models</span><span class="o">.</span><span class="n">CharField</span><span class="p">(</span><span class="n">max_length</span><span class="o">=</span><span class="mi">200</span><span class="p">)</span>
+    <span class="n">content</span> <span class="o">=</span> <span class="n">MarkdownxField</span><span class="p">()</span>  <span class="c1"># Enables Markdown editor in admin</span>
+    <span class="c1"># ... other fields ...</span>
+</code></pre></div></td></tr></tbody></table></div>
+<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+<pre>from django.db import models
+from markdownx.models import MarkdownxField
+
+class Post(models.Model):
+    title = models.CharField(max_length=200)
+    content = MarkdownxField()  # Enables Markdown editor in admin
+    # ... other fields ...
+</pre>
+<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+<pre>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</pre></div>
+
+
+
+<a href="/blog/">Back to blog</a>
+
+        <script src="/static/js/copy-code.js"></script>
+    </main>
+    <footer>
+        <p>© 2026 inpv</p>
+    </footer>
+</body>
+</html>
