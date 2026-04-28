@@ -1,0 +1,32 @@
+pre {
+    white-space: pre-wrap;
+    word-wrap: break-word;
+    overflow: auto;
+    background-color: #111;
+    padding: 1rem;
+    border-radius: 5px;
+    color: #FFFFFF;
+}
+
+.post-text p {
+    font-family: "Lato", sans-serif;
+}
+
+.post-image {
+    width: 600px;  /* Fixed width */
+    height: auto;  /* Maintain aspect ratio */
+    display: block;  /* Prevents inline spacing issues */
+    margin: 0 auto;  /* Optional: Center it */
+}
+
+/* For responsiveness on smaller screens */
+@media (max-width: 600px) {
+    .post-image {
+        width: 100%;
+    }
+}
+
+.matrix-code-img {
+  display: block;
+  margin: auto;
+}

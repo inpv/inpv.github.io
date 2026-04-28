@@ -1,0 +1,53 @@
+<!--?xml version="1.0" encoding="utf-8"?-->
+<svg xmlns="http://www.w3.org/2000/svg" width="512" height="512" viewBox="0 0 512 512">
+  <defs>
+    <radialGradient id="bgGrad" cx="50%" cy="35%" r="70%">
+      <stop offset="0%" stop-color="#061006"></stop>
+      <stop offset="70%" stop-color="#05120b"></stop>
+      <stop offset="100%" stop-color="#000000"></stop>
+    </radialGradient>
+    <style type="text/css">
+      .neon { fill: none; stroke: #00ff41; stroke-linecap: round; stroke-linejoin: round; stroke-width: 28; }
+      .slash { fill: none; stroke: #c8ffd0; stroke-linecap: round; stroke-linejoin: round; stroke-width: 24; }
+      .rain { stroke: #00ff41; stroke-opacity: 0.12; stroke-width: 2; stroke-linecap: round; }
+    </style>
+  </defs>
+
+  <!-- Background -->
+  <rect fill="url(#bgGrad)" x="0" y="0" width="512" height="512"></rect>
+
+  <!-- "code rain" vertical streaks (stable positions so SVG is deterministic) -->
+  <g stroke-linecap="round">
+    <line class="rain" x1="40" y1="-40" x2="40" y2="380"></line>
+    <line class="rain" x1="72" y1="-20" x2="72" y2="420"></line>
+    <line class="rain" x1="110" y1="0" x2="110" y2="500"></line>
+    <line class="rain" x1="160" y1="-60" x2="160" y2="360"></line>
+    <line class="rain" x1="200" y1="-10" x2="200" y2="450"></line>
+    <line class="rain" x1="260" y1="-40" x2="260" y2="520"></line>
+    <line class="rain" x1="300" y1="-20" x2="300" y2="460"></line>
+    <line class="rain" x1="340" y1="-50" x2="340" y2="380"></line>
+    <line class="rain" x1="380" y1="0" x2="380" y2="520"></line>
+    <line class="rain" x1="420" y1="-30" x2="420" y2="430"></line>
+    <line class="rain" x1="476" y1="-10" x2="476" y2="420"></line>
+  </g>
+
+  <!-- subtle horizontal scanlines -->
+  <g opacity="0.06" fill="none" stroke="#00ff41">
+    <line x1="14" y1="210" x2="498" y2="210"></line>
+    <line x1="24" y1="248" x2="488" y2="248"></line>
+    <line x1="10" y1="288" x2="502" y2="288"></line>
+  </g>
+
+  <!-- central </> glyph: angle brackets neon, forward slash pale -->
+  <g transform="translate(0,0)">
+    <!-- left bracket -->
+    <path class="neon" d="M150,160 L100,256 L150,352"></path>
+    <!-- right bracket -->
+    <path class="neon" d="M362,160 L412,256 L362,352"></path>
+    <!-- forward slash (pale/light green to match the first icon's slash) -->
+    <path class="slash" d="M210,372 L302,140"></path>
+  </g>
+
+  <!-- faint circular core for contrast -->
+  <circle cx="256" cy="256" r="120" fill="rgba(0,40,12,0.06)"></circle>
+</svg>
