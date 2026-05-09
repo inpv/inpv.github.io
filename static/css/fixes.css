@@ -37,7 +37,7 @@ pre {
   border-radius: 20px;
 }
 
-.main-header {
+.disable-link-highlighting {
   color: #00ffcc;
   text-decoration: none;
 }
