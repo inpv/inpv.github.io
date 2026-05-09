@@ -38,6 +38,13 @@ pre {
 }
 
 .disable-link-highlighting {
-  color: #ff00ff;
   text-decoration: none;
+}
+
+.main-header {
+  color: #00ffcc;
+}
+
+.post-list-heading {
+  color: #ff00ff;
 }
