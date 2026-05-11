@@ -8,7 +8,7 @@ pre {
     color: #FFFFFF;
 }
 
-.post-text p {
+.post-text p, .post-text ol li, .post-text ul li {
     font-family: "Lato", sans-serif;
 }
 
