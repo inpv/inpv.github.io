@@ -16,6 +16,14 @@ pre {
     font-family: "Roboto", sans-serif;
 }
 
+.post-text a {
+  color: #ff00ff;
+}
+
+.post-text a:hover {
+  color: #00ff00;
+}
+
 .post-image {
     width: 600px;  /* Fixed width */
     height: auto;  /* Maintain aspect ratio */
