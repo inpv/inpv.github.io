@@ -1,0 +1,339 @@
+<!-- appname/inpv_github_io/templates/inpv_github_io/about.html -->
+<!-- appname/inpv_github_io/templates/inpv_github_io/base.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>How this blog was built: setting up Django Sidewinder kit for local Python development - full guide (Part 2) | Codeforge Archives</title>
+    <link rel="stylesheet" href="/static/css/styles.css">
+    <link rel="stylesheet" href="/static/css/pygments.css">
+    <link rel="stylesheet" href="/static/css/fixes.css">
+    <link rel="icon" type="image/svg+xml" href="/static/favicon.svg">
+    <link rel="alternate icon" href="/static/favicon.svg">
+</head>
+<body>
+    <header>
+        <h1><a href="/" class="disable-link-highlighting main-header">Codeforge Archives</a></h1>
+        <nav>
+            <a href="/">Home</a>
+            <a href="/blog/">Blog</a>
+            <a href="/about/">About</a>
+            <a href="/contacts/">Contacts</a>
+        </nav>
+    </header>
+    <main>
+        
+<h2>How this blog was built: setting up Django Sidewinder kit for local Python development - full guide (Part 2)</h2>
+<p>June 7, 2026, 2:18 p.m.</p>
+
+<ul class="categories_list">
+    
+        <li><a href="/category/17/">tech</a>; </li>
+    
+        <li><a href="/category/19/">python</a>; </li>
+    
+        <li><a href="/category/20/">django</a>; </li>
+    
+        <li><a href="/category/21/">sidewinder</a>; </li>
+    
+        <li><a href="/category/25/">linux</a></li>
+    
+</ul>
+
+
+    <div>
+        <img src="/media/posts/previews/sidewinder_setup_part2.png" alt="How this blog was built: setting up Django Sidewinder kit for local Python development - full guide (Part 2) preview" class="post-image">
+    </div>
+
+
+<div class="post-text"><p>In the second part of the article series we're going to go through most of the details of Sidewinder installation process, for the official documentation is pretty sparse in that regard.</p>
+
+<p>See the first article with the overall bird's eye view plan description <a href="https://inpv.github.io/post/35/">here</a>.</p>
+
+<p>So first, we clone the repository as a template to start clean without leftover commits.</p>
+
+<p>I recommend setting the repo in Github settings as a private one, because only the distilled version is going to be public in our case.</p>
+
+<p>Press "Use this template - create a new repository"</p>
+
+<p><img alt="Use this template - create a new repository" src="/media/posts/images/2026-06-04_16-33_cOub2rO.png"></p>
+<p>, then name your repository in the "General" section with a unique name inside your account's scope and choose "Visibility - Private" in "Configuration" section.</p>
+
+<p><img alt="Visibility - Private" src="/media/posts/images/2026-06-04_16-38_CMKgUCQ.png"></p>
+<p>Then press "Create repository" button.</p>
+
+<p>The repo will be generated shortly after.</p>
+
+<p>Then you'll need to clone the repo with either CLI or GUI of your IDE. Let's use PyCharm for this.</p>
+
+<p>Open PyCharm, choose "File - Create from version control" and paste the new project's URL copied from address bar to the "URL" field, in our case it's going to be "https://github.com/%username%/test-repo" and press "Clone".</p>
+
+<p>Choose "Log In via Github" in the context window and the login page will be opened in your default web browser.</p>
+
+<p><img alt="Log In via Github" src="/media/posts/images/2026-06-04_16-46_FcpyQ5I.png"></p>
+<p>Press "Authorize in GitHub" button and close the tab afterwards when you see this text:</p>
+
+<p><img alt="Authorized in GitHub" src="/media/posts/images/2026-06-04_16-47_Ykxh8ni.png"></p>
+<p>You may see that when you open the PyCharm terminal, the interpreter is not yet set up. It's because Sidewinder requires uv package manager to be installed and then set up for the project.</p>
+
+<p>Install uv according to the official <a href="https://docs.astral.sh/uv/#installation">docs</a> with "curl -LsSf https://astral.sh/uv/install.sh | sh" command (since we're running on Linux) and verify the installation according to the first steps <a href="https://docs.astral.sh/uv/getting-started/first-steps/">guide</a>.</p>
+
+<p>Then change your current directory to the one of our new project, if you haven't already, with</p>
+
+<pre>cd ~/PycharmProjects/test-repo
+</pre>
+
+<p>Next, configure the project's interpreter in PyCharm.</p>
+
+<p>First run</p>
+
+<pre>uv sync
+</pre>
+
+<p>to install all necessary dependencies and avoid missing ones.</p>
+
+<p>Then select the interpreter menu in the lower-right corner of the IDE and choose:</p>
+
+<pre>Add New Interpreter =&gt; Add Local Interpreter =&gt; Select Existing Environment
+</pre>
+
+<p>Select the virtual environment that was just created by uv for the project. PyCharm may spend some time indexing packages, so expect high CPU usage.</p>
+
+<p>After configuring the interpreter, close the Local terminal tab and open it again. You should now see the virtual environment name in the prompt, for example:</p>
+
+<pre>(sidewinder) [%username%@%hostname% test-repo]$
+</pre>
+
+<p>When the interpreter is up and running, run pre-commit hooks with</p>
+
+<pre>uv run -- pre-commit install
+</pre>
+
+<p>Then install Playwright with</p>
+
+<pre>uv run -- playwright install
+</pre>
+
+<p>Now we need to configure the .env file.</p>
+
+<p>First copy the example file with</p>
+
+<pre>cp .env-example .env
+</pre>
+
+<p>We don't need to edit anything in the file except for PROJECT_NAME to anything how you would like to call your project, in our case PROJECT_NAME="Test Repo" and DJ_DATABASE_CONN_STRING to however we'd like to call our new database, that we'll create next, for example DJ_DATABASE_CONN_STRING=postgres://postgres:postgres@localhost:5432/test_repo_db .</p>
+
+<p>Default DJANGO_SECRET_KEY and DJANGO_DEBUG values are already added in Sidewinder, but you may also modify them as you see fit.</p>
+
+<p>Don't forget to check that your .env file is added to .gitignore, even for a private repo.</p>
+
+<p>Now we'll need to install postgres system-wide using however the package is called in your distro. On Arch it's postgresql.</p>
+
+<p>Run</p>
+
+<pre>sudo pacman -S postgresql
+</pre>
+
+<p>from your main user.</p>
+
+<p>Note that on a clean Arch postgresql setup you may also have to initialize the database cluster with</p>
+
+<pre>sudo -i -u postgres initdb --locale en_US.UTF-8 -D /var/lib/postgres/data
+</pre>
+
+<p>, however, you should run initdb only if the service hasn't been initialized yet, check it first with:</p>
+
+<pre>sudo ls /var/lib/postgres/data
+</pre>
+
+<p>If it's empty or the directory doesn't exist, you need to run initdb.</p>
+
+<p>Then start and enable the postgresql systemd service:</p>
+
+<pre>sudo systemctl enable --now postgresql
+</pre>
+
+<p>Verify the service works and is enabled:</p>
+
+<pre>sudo systemctl status postgresql
+</pre>
+
+<p>Create the database (with the name we mentioned before) and alter the default postgres user (we don't really need another one for local dev and we already created the default postgres database role during initdb, regardless of whether it was manual or automatic):</p>
+
+<pre>sudo -i -u postgres psql
+</pre>
+
+<p>Then inside the console:</p>
+
+<pre>ALTER USER postgres WITH PASSWORD 'postgres';
+CREATE DATABASE test_repo_db;
+</pre>
+
+<p>NB! Use "postgres" password ONLY for local development, never in production.</p>
+
+<p>Verify the user with \du and the database with \l, then exit the console with \q.</p>
+
+<p>Then test the direct connection to the database with</p>
+
+<pre>psql -U postgres -d test_repo_db -h localhost
+</pre>
+
+<p>You should get an output and SQL prompt with</p>
+
+<pre>psql (XX.X)
+Type "help" for help.
+test_repo_db=#
+</pre>
+
+<p>Again close the console with \q.</p>
+
+<p>If you don't need geolocation, you need to remove any GeoDjango-related entries from INSTALLED_APPS in appname/settings.py. Usually it's</p>
+
+<pre>django.contrib.gis
+</pre>
+
+<p>If you don't do it, you can get an error like</p>
+
+<pre>ImproperlyConfigured: Could not find the GDAL library
+</pre>
+
+<p>, because the Django GIS extension will demand GDAL to be installed even if the geolocation features aren't used.</p>
+
+<p>If you plan to use geolocation features, install PostGIS database extension and some libraries for it to your system. On Arch that can be done with:</p>
+
+<pre>sudo pacman -S postgis gdal geos
+</pre>
+
+<p>Switch to postgres user and launch the database console with</p>
+
+<pre>sudo -i -u postgres psql
+</pre>
+
+<p>Then switch to our new database (otherwise it would be applied to the default postgres database) and enable PostGIS extension on it with</p>
+
+<pre>\c test_repo_db
+CREATE EXTENSION postgis;
+</pre>
+
+<p>Verify that PostGIS is actually installed with:</p>
+
+<pre>SELECT PostGIS_Version();
+</pre>
+
+<p>It should yield an output of this nature:</p>
+
+<pre>3.x.x ...
+</pre>
+
+<p>Exit the console with \q and return to your main user with</p>
+
+<pre>exit
+</pre>
+
+<p>Then create your new app inside the appname folder to not rename anything and to achieve better separation of concerns:</p>
+
+<pre>mkdir appname/test_repo
+uv run -- manage.py startapp test_repo appname/test_repo
+</pre>
+
+<p>Use underscores in the directory and app names, otherwise you'll get an error:</p>
+
+<pre>CommandError: 'test-repo' is not a valid app name. Please make sure the name is a valid identifier.
+</pre>
+
+<p>Then we need to wire the new app to our configs.</p>
+
+<p>First, change the value of the name from test_repo to appname.test_repo in the new appname/test_repo/apps.py file. </p>
+
+<p>Second, register the new app in appname.test_repo format in INSTALLED_APPS in appname/settings.py.</p>
+
+<p>Since we are going to be using Huey + Redis task queueing, we need to install Redis first before we run the server. On Arch it's</p>
+
+<pre>sudo pacman -S redis
+</pre>
+
+<p>Then start and enable Redis' systemd service with</p>
+
+<pre>sudo systemctl enable --now redis
+</pre>
+
+<p>Verify that Redis works with</p>
+
+<pre>redis-cli ping
+</pre>
+
+<p>Should yield:</p>
+
+<pre>PONG
+</pre>
+<blockquote></blockquote>
+<p>Then run</p>
+<pre>uv run -- manage.py makemigrations
+</pre>
+
+<p>before actually migrating - it's useful during the first run on local dev environments, for it generates migration files for your new app before anything exists in the database.</p>
+
+<p>Then run</p>
+
+<pre>uv run -- manage.py migrate
+</pre>
+
+<p>Then check that there were no issues with</p>
+
+<pre>uv run -- manage.py check
+</pre>
+
+<p>That should yield an output like:</p>
+
+<pre>System check identified no issues (0 silenced).
+</pre>
+
+<p>Create the superuser for dj-admin with</p>
+
+<pre>uv run -- manage.py createsuperuser
+</pre>
+
+<p>Then finally start the local server with</p>
+
+<pre>uv run -- manage.py runserver
+</pre>
+
+<p>The server should be now up and running.</p>
+
+<p>Enter the superuser's credentials at login at the <a href="http://localhost:8000/dj-admin/">admin panel</a>.</p>
+
+<p>This setup should be enough to start developing locally.</p>
+
+<p>In the next part of the series we'll cover how to build the basic website structure according to Django's MVT architecture and add markdown support for inline code and code blocks, as well as distillation and fixture loading mechanisms to display the actual content of the posts across all environments.</p></div>
+
+
+    <h3>Images</h3>
+    
+        <div>
+            <img src="/media/posts/images/2026-06-04_16-33_cOub2rO.png" alt="Post img" class="post-image">
+        </div>
+    
+        <div>
+            <img src="/media/posts/images/2026-06-04_16-38_CMKgUCQ.png" alt="Post img" class="post-image">
+        </div>
+    
+        <div>
+            <img src="/media/posts/images/2026-06-04_16-46_FcpyQ5I.png" alt="Post img" class="post-image">
+        </div>
+    
+        <div>
+            <img src="/media/posts/images/2026-06-04_16-47_Ykxh8ni.png" alt="Post img" class="post-image">
+        </div>
+    
+
+
+<a href="/blog/">Back to blog</a>
+
+        <script src="/static/js/copy-code.js"></script>
+    </main>
+    <footer>
+        <p>© 2026 inpv</p>
+    </footer>
+</body>
+</html>
