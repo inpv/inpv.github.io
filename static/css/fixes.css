@@ -25,10 +25,11 @@ pre {
 }
 
 .post-image {
-    width: 600px;  /* Fixed width */
-    height: auto;  /* Maintain aspect ratio */
-    display: block;  /* Prevents inline spacing issues */
-    margin: 0 auto;  /* Optional: Center it */
+    max-width: 600px;
+    width: 100%;
+    height: auto;
+    display: block;
+    margin: 0 auto;
 }
 
 /* For responsiveness on smaller screens */
