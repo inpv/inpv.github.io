@@ -76,3 +76,10 @@ pre {
 .main-image {
   width: 350px;
 }
+
+.post-text img {
+    max-width: 100%;
+    height: auto;
+    display: block;
+    margin: 1rem auto;
+}
